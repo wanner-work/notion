@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@notionhq/client": "^2.2.15",
+    "@wanner.work/image": "^1.1.2",
     "jotai": "^2.8.0"
   },
   "devDependencies": {

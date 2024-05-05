@@ -17,7 +17,7 @@ export default defineConfig([
             typescript({tsconfig: "./tsconfig.json"}),
             preserveDirective()
         ],
-        external: ["react", "react-dom", 'react/jsx-runtime', 'jotai'],
+        external: ["react", "react-dom", 'react/jsx-runtime', '@notionhq/client', '@wanner.work/image'],
     },
     {
         input: "src/index.tsx",

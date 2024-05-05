@@ -32,6 +32,12 @@ export default class NotionQuery {
   private cache: NotionQueryCache | undefined
 
   /**
+   * The debug mode to log additional information
+   * @private
+   */
+  private readonly debug: boolean = false
+
+  /**
    * The constructor of the NotionQuery class
    * @param id
    * @param integrationToken
@@ -55,27 +61,39 @@ export default class NotionQuery {
     if (options?.cacheMaxAge) {
       this.cacheMaxAge = options.cacheMaxAge
     }
+    if (options?.debug) {
+      this.debug = options.debug
+      this.log('Debug mode enabled')
+    }
   }
 
   /**
    * Execute the query to get all the children of a page or a parent block
    */
   public async execute(useCache = true): Promise<ListBlockChildrenResponse> {
+    this.log('Execute')
+
     if (useCache) {
+      this.log('Try using cache')
       if (this.cache && Date.now() - this.cache.timestamp < this.cacheMaxAge) {
+        this.log('Cache hit, returning cached data')
         return this.cache.data
       } else {
+        this.log('Cache expired or not available')
         this.cache = undefined
       }
     }
 
+    this.log('Fetch data from Notion API')
     const response = await this.queryBlocks(this.id)
-
     if (this.cacheMaxAge > 0) {
+      this.log('Store data in cache', 'Cache max age:', this.cacheMaxAge)
       this.cache = {
         timestamp: Date.now(),
         data: response
       }
+    } else {
+      this.log('Cache disabled or cache max age not set')
     }
 
     return response
@@ -96,7 +114,13 @@ export default class NotionQuery {
       args.start_cursor = nextCursor
     }
 
-    const response = await this.client.blocks.children.list(args)
+    let response: ListBlockChildrenResponse
+
+    try {
+      response = await this.client.blocks.children.list(args)
+    } catch (error) {
+      throw new Error(`NotionQuery: An error occurred while fetching the blocks of the page or the parent block. ${error.message}`)
+    }
 
     if (response.has_more) {
       const next = await this.queryBlocks(id, response.next_cursor as string)
@@ -104,5 +128,11 @@ export default class NotionQuery {
     }
 
     return response
+  }
+
+  private log(...data: any[]) {
+    if (this.debug) {
+      console.log('NotionQuery:', ...data)
+    }
   }
 }
