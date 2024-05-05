@@ -6,12 +6,10 @@ import {
 import NotionRichText from '../common/NotionRichText'
 import NotionBlockProps from '../../interfaces/NotionBlockProps'
 
-interface Props extends NotionBlockProps {
-  block:
-    | Heading1BlockObjectResponse
-    | Heading2BlockObjectResponse
-    | Heading3BlockObjectResponse
-}
+interface Props extends NotionBlockProps<
+  | Heading1BlockObjectResponse
+  | Heading2BlockObjectResponse
+  | Heading3BlockObjectResponse> {}
 
 export default function NotionHeading({ block }: Props) {
   switch (block.type) {

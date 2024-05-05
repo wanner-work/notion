@@ -1,4 +1,4 @@
-import { NotionQuery } from '@wanner.work/notion'
+import Notion, { NotionQuery } from '@wanner.work/notion'
 
 export default async function Home() {
   const query = new NotionQuery('bf502a532e2a401ab1c76accc12810f1', 'secret_K9hQzPOdQmQuc2idrZML76jvYn5dYAGBXPCmelkIfCe', {
@@ -12,6 +12,7 @@ export default async function Home() {
     <main className="bg-black">
       <div className="min-h-screen w-screen bg-black text-white">
         <div className="px-8">
+          <Notion data={data} />
         </div>
       </div>
     </main>

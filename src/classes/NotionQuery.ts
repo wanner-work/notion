@@ -63,7 +63,7 @@ export default class NotionQuery {
     }
     if (options?.debug) {
       this.debug = options.debug
-      this.log('Debug mode enabled')
+      this.log('Initialized')
     }
   }
 
@@ -92,10 +92,12 @@ export default class NotionQuery {
         timestamp: Date.now(),
         data: response
       }
+      this.log('Data stored in cache')
     } else {
       this.log('Cache disabled or cache max age not set')
     }
 
+    this.log(`Fetched ${response.results.length} blocks`)
     return response
   }
 
@@ -130,6 +132,11 @@ export default class NotionQuery {
     return response
   }
 
+  /**
+   * Log additional information if debug mode is enabled
+   * @param data
+   * @private
+   */
   private log(...data: any[]) {
     if (this.debug) {
       console.log('NotionQuery:', ...data)

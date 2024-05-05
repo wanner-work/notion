@@ -1,6 +1,6 @@
 import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
-export default interface NotionBlockProps {
-  block: BlockObjectResponse
+export default interface NotionBlockProps<T = BlockObjectResponse> {
+  block: T
   nested?: boolean
 }

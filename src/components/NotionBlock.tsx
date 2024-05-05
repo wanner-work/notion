@@ -1,8 +1,8 @@
 import NotionBlockProps from '../interfaces/NotionBlockProps'
 import { FunctionComponent } from 'react'
-import NotionHeading from './types/NotionHeading'
-import NotionParagraph from './types/NotionParagraph'
-import NotionImage from './types/NotionImage'
+import NotionHeading from './blocks/NotionHeading'
+import NotionParagraph from './blocks/NotionParagraph'
+import NotionImage from './blocks/NotionImage'
 
 export default function NotionBlock ({ block, nested }: NotionBlockProps) {
   let component: FunctionComponent<NotionBlockProps> = () => undefined
@@ -16,7 +16,7 @@ export default function NotionBlock ({ block, nested }: NotionBlockProps) {
     case 'paragraph':
       component = NotionParagraph
       break
-    case "image":
+    case 'image':
       component = NotionImage
       break
   }
