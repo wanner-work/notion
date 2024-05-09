@@ -1,10 +1,13 @@
 import {
+  BlockObjectResponse,
   ListBlockChildrenParameters,
   ListBlockChildrenResponse
 } from '@notionhq/client/build/src/api-endpoints'
 import { Client } from '@notionhq/client'
 import NotionQueryOptions from '../interfaces/NotionQueryOptions'
 import NotionQueryCache from '../interfaces/NotionQueryCache'
+import NotionBlockObject from '../interfaces/NotionBlockObject'
+import NotionQueryData from '../interfaces/NotionQueryData'
 
 export default class NotionQuery {
   /**
@@ -70,7 +73,7 @@ export default class NotionQuery {
   /**
    * Execute the query to get all the children of a page or a parent block
    */
-  public async execute(useCache = true): Promise<ListBlockChildrenResponse> {
+  public async execute(useCache = true): Promise<NotionQueryData> {
     this.log('Execute')
 
     if (useCache) {
@@ -85,20 +88,21 @@ export default class NotionQuery {
     }
 
     this.log('Fetch data from Notion API')
-    const response = await this.queryBlocks(this.id)
+    const original = await this.queryListBlock(this.id)
+    const transformed = await this.transformListBlockResponse(original)
     if (this.cacheMaxAge > 0) {
       this.log('Store data in cache', 'Cache max age:', this.cacheMaxAge)
       this.cache = {
         timestamp: Date.now(),
-        data: response
+        data: transformed
       }
       this.log('Data stored in cache')
     } else {
       this.log('Cache disabled or cache max age not set')
     }
 
-    this.log(`Fetched ${response.results.length} blocks`)
-    return response
+    this.log(`Fetched ${original.results.length} parent blocks`)
+    return transformed
   }
 
   /**
@@ -107,7 +111,7 @@ export default class NotionQuery {
    * @param nextCursor
    * @private
    */
-  private async queryBlocks(id: string, nextCursor?: string) {
+  private async queryListBlock(id: string, nextCursor?: string) {
     const args: ListBlockChildrenParameters = {
       block_id: id
     }
@@ -125,11 +129,37 @@ export default class NotionQuery {
     }
 
     if (response.has_more) {
-      const next = await this.queryBlocks(id, response.next_cursor as string)
+      const next = await this.queryListBlock(id, response.next_cursor as string)
       response.results.push(...next.results)
     }
 
     return response
+  }
+
+  /**
+   * Recursively transform the list block response to a custom object with children
+   * @param response
+   * @param level
+   * @private
+   */
+  public async transformListBlockResponse(response: ListBlockChildrenResponse, level = 0) {
+    const objects: NotionBlockObject[] = []
+
+    for (const block of response.results as BlockObjectResponse[]) {
+      const object: NotionBlockObject = {
+        level,
+        block
+      }
+
+      if (block.has_children) {
+        const children = await this.queryListBlock(block.id)
+        object.children = await this.transformListBlockResponse(children, level + 1)
+      }
+
+      objects.push(object)
+    }
+
+    return objects
   }
 
   /**
