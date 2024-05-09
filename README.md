@@ -74,13 +74,13 @@ const results = request.results as PageObjectResponse[]
 const page = results[0]
 
 // get all blocks from the page
-const response = await notion.blocks.children.list({
+const response = await client.blocks.children.list({
   block_id: page.id
 })
 
 // transform the data using the NotionQuery class
 const query = new NotionQuery(client)
-const data = await query.transform(response.results)
+const data = await query.transform(response)
 ```
 
 ### Rendering
