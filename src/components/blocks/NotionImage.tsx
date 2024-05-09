@@ -1,11 +1,11 @@
 import { ImageBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
-import NotionBlockProps from '../../interfaces/NotionBlockProps'
 import Image from '@wanner.work/image'
 import getImageURL from '../../methods/data/getImageURL'
+import NotionBlockObject from '../../interfaces/NotionBlockObject'
 
-interface Props extends NotionBlockProps<ImageBlockObjectResponse> {}
+interface Props extends NotionBlockObject<ImageBlockObjectResponse> {}
 
-export default function NotionImage({ block, nested }: Props) {
+export default function NotionImage({ block }: Props) {
   const src = getImageURL(block.image)
 
   return (

@@ -1,8 +1,6 @@
-import {
-  ListBlockChildrenResponse,
-} from '@notionhq/client/build/src/api-endpoints'
+import NotionQueryData from './NotionQueryData'
 
 export default interface NotionQueryCache {
   timestamp: number;
-  data: ListBlockChildrenResponse;
+  data: NotionQueryData
 }

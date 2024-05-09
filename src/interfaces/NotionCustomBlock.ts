@@ -1,8 +1,8 @@
 import NotionBlockTypes from './NotionBlockTypes'
 import { FunctionComponent } from 'react'
-import NotionBlockProps from './NotionBlockProps'
+import NotionBlockObject from './NotionBlockObject'
 
 export default interface NotionCustomBlock {
   type: NotionBlockTypes
-  component: FunctionComponent<NotionBlockProps<any>>
+  component: FunctionComponent<NotionBlockObject<any>>
 }

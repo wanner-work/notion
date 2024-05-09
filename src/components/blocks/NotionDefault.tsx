@@ -1,6 +1,6 @@
-import NotionBlockProps from '../../interfaces/NotionBlockProps'
+import NotionBlockObject from '../../interfaces/NotionBlockObject'
 
-export default function NotionDefault({ block }: NotionBlockProps) {
+export default function NotionDefault({ block }: NotionBlockObject) {
   return (
     <div className="bg-red-600/20 p-5 mt-5 text-red-500 font-mono rounded text-sm">
       <p className="font-bold mb-2">Unsuported type</p>

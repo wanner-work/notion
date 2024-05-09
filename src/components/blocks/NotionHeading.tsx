@@ -4,9 +4,9 @@ import {
   Heading3BlockObjectResponse
 } from '@notionhq/client/build/src/api-endpoints'
 import NotionRichText from '../common/NotionRichText'
-import NotionBlockProps from '../../interfaces/NotionBlockProps'
+import NotionBlockObject from '../../interfaces/NotionBlockObject'
 
-interface Props extends NotionBlockProps<
+interface Props extends NotionBlockObject<
   | Heading1BlockObjectResponse
   | Heading2BlockObjectResponse
   | Heading3BlockObjectResponse> {}
