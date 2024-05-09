@@ -3,9 +3,8 @@
 import { ImageBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import Image from '@wanner.work/image'
 import { useCallback, useState } from 'react'
-import { getNotionImageURL, NotionBlockObject } from '@wanner.work/notion'
-
-
+import type { NotionBlockObject } from '@wanner.work/notion'
+import { getNotionImageURL } from '@wanner.work/notion/helper'
 
 export default function NotionImage({ block, level }: NotionBlockObject<ImageBlockObjectResponse>) {
   const [showGraphicImage, setShowGraphicImage] = useState(false)
