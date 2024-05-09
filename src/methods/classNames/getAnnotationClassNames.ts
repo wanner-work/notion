@@ -1,6 +1,6 @@
-import { AnnotationResponse } from '@notionhq/client/build/src/api-endpoints'
+import NotionAnnotations from '../../interfaces/NotionAnnotations'
 
-export default function getAnnotationClassNames(annotations: AnnotationResponse) {
+export default function getAnnotationClassNames(annotations: NotionAnnotations) {
   let className = ''
 
   if (annotations.bold) {

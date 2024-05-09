@@ -2,7 +2,7 @@
  * This interface should be exposed by the @notionhq/client package, but it is not. That's why we have to define it here.
  * It is just a copy of the interface that is used in the @notionhq/client package. See https://github.com/makenotion/notion-sdk-js/issues/507
  */
-export default interface Annotations {
+export default interface NotionAnnotations {
   bold?: boolean;
   italic?: boolean;
   strikethrough?: boolean;
