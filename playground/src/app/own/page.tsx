@@ -1,8 +1,11 @@
-import Notion, { NotionQuery } from '@wanner.work/notion'
 import NotionCallout from '@/components/NotionCallout'
 import NotionImage from '@/components/NotionImage'
 import { Client } from '@notionhq/client'
-import { PageObjectResponse, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
+import {
+  PageObjectResponse,
+  QueryDatabaseResponse
+} from '@notionhq/client/build/src/api-endpoints'
+import Notion, { NotionQuery } from '@wanner.work/notion'
 
 export default async function Own() {
   const client = new Client({
@@ -27,15 +30,21 @@ export default async function Own() {
     <main className="bg-black">
       <div className="min-h-screen w-screen bg-black text-white">
         <div className="p-8">
-          <Notion data={data} custom={[{
-            type: 'callout',
-            component: NotionCallout
-          }, {
-            type: 'image',
-            component: NotionImage
-          }]} />
+          <Notion
+            data={data}
+            custom={[
+              {
+                type: 'callout',
+                component: NotionCallout
+              },
+              {
+                type: 'image',
+                component: NotionImage
+              }
+            ]}
+          />
         </div>
       </div>
     </main>
-  );
+  )
 }

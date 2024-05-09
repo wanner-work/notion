@@ -1,6 +1,8 @@
 import NotionAnnotations from '../../interfaces/NotionAnnotations'
 
-export default function getAnnotationClassNames(annotations: NotionAnnotations) {
+export default function getAnnotationClassNames(
+  annotations: NotionAnnotations
+) {
   let className = ''
 
   if (annotations.bold) {

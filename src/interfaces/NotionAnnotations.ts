@@ -3,10 +3,29 @@
  * It is just a copy of the interface that is used in the @notionhq/client package. See https://github.com/makenotion/notion-sdk-js/issues/507
  */
 export default interface NotionAnnotations {
-  bold?: boolean;
-  italic?: boolean;
-  strikethrough?: boolean;
-  underline?: boolean;
-  code?: boolean;
-  color?: "default" | "gray" | "brown" | "orange" | "yellow" | "green" | "blue" | "purple" | "pink" | "red" | "gray_background" | "brown_background" | "orange_background" | "yellow_background" | "green_background" | "blue_background" | "purple_background" | "pink_background" | "red_background";
+  bold?: boolean
+  italic?: boolean
+  strikethrough?: boolean
+  underline?: boolean
+  code?: boolean
+  color?:
+    | 'default'
+    | 'gray'
+    | 'brown'
+    | 'orange'
+    | 'yellow'
+    | 'green'
+    | 'blue'
+    | 'purple'
+    | 'pink'
+    | 'red'
+    | 'gray_background'
+    | 'brown_background'
+    | 'orange_background'
+    | 'yellow_background'
+    | 'green_background'
+    | 'blue_background'
+    | 'purple_background'
+    | 'pink_background'
+    | 'red_background'
 }

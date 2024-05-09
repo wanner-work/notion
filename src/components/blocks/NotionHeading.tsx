@@ -3,13 +3,15 @@ import {
   Heading2BlockObjectResponse,
   Heading3BlockObjectResponse
 } from '@notionhq/client/build/src/api-endpoints'
-import NotionRichText from '../common/NotionRichText'
 import NotionBlockObject from '../../interfaces/NotionBlockObject'
+import NotionRichText from '../common/NotionRichText'
 
-interface Props extends NotionBlockObject<
-  | Heading1BlockObjectResponse
-  | Heading2BlockObjectResponse
-  | Heading3BlockObjectResponse> {}
+interface Props
+  extends NotionBlockObject<
+    | Heading1BlockObjectResponse
+    | Heading2BlockObjectResponse
+    | Heading3BlockObjectResponse
+  > {}
 
 export default function NotionHeading({ block }: Props) {
   switch (block.type) {

@@ -1,7 +1,7 @@
 import { ImageBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import Image from '@wanner.work/image'
-import getImageURL from '../../methods/data/getImageURL'
 import NotionBlockObject from '../../interfaces/NotionBlockObject'
+import getImageURL from '../../methods/data/getImageURL'
 
 interface Props extends NotionBlockObject<ImageBlockObjectResponse> {}
 

@@ -1,6 +1,6 @@
-import Notion, { NotionQuery } from '@wanner.work/notion'
 import NotionCallout from '@/components/NotionCallout'
 import NotionImage from '@/components/NotionImage'
+import Notion, { NotionQuery } from '@wanner.work/notion'
 
 export default async function Home() {
   const query = new NotionQuery(process.env.NOTION_SECRET as string, {
@@ -13,15 +13,21 @@ export default async function Home() {
     <main className="bg-black">
       <div className="min-h-screen w-screen bg-black text-white">
         <div className="p-8">
-          <Notion data={data} custom={[{
-            type: 'callout',
-            component: NotionCallout
-          }, {
-            type: 'image',
-            component: NotionImage
-          }]} />
+          <Notion
+            data={data}
+            custom={[
+              {
+                type: 'callout',
+                component: NotionCallout
+              },
+              {
+                type: 'image',
+                component: NotionImage
+              }
+            ]}
+          />
         </div>
       </div>
     </main>
-  );
+  )
 }

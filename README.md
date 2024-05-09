@@ -98,9 +98,7 @@ import Notion from '@wanner.work/notion'
 export default function Application() {
   // get the data using one of the methods above
 
-  return (
-    <Notion data={data}/>
-  )
+  return <Notion data={data} />
 }
 ```
 
@@ -135,23 +133,35 @@ by the `@wanner.work/notion` package, you can pass a custom block component per 
 
 ```tsx
 import { ImageBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
-import Notion, { getNotionImageURL, NotionBlockObject } from '@wanner.work/notion'
+import Notion, {
+  getNotionImageURL,
+  NotionBlockObject
+} from '@wanner.work/notion'
 
 export default function Application() {
   // data is the transformed data from the notion API
 
   return (
-    <Notion data={data} custom={[{
-      type: 'image',
-      component: MyImageComponent
-    }]}/>
+    <Notion
+      data={data}
+      custom={[
+        {
+          type: 'image',
+          component: MyImageComponent
+        }
+      ]}
+    />
   )
 }
 
-// to see which props are available you can use the NotionBlockObject interface for your props with the correct generic, 
+// to see which props are available you can use the NotionBlockObject interface for your props with the correct generic,
 // in this case the ImageBlockObjectResponse interface.
-function MyImageComponent({ block, level, children }: NotionBlockObject<ImageBlockObjectResponse>) {
-  return <img src={getNotionImageURL(block.image)} alt={alt}/>
+function MyImageComponent({
+  block,
+  level,
+  children
+}: NotionBlockObject<ImageBlockObjectResponse>) {
+  return <img src={getNotionImageURL(block.image)} alt={alt} />
 }
 ```
 
@@ -177,7 +187,7 @@ These methods may be imported through `@wanner.work/notion/helper`
 
 This method is used to get the image URL from a notion image block. It is used by the built-in image block component.
 
-- `image` (ImageBlockObjectResponse['image'] | PageObjectResponse['cover']): The image or cover object inside a block.  
+- `image` (ImageBlockObjectResponse['image'] | PageObjectResponse['cover']): The image or cover object inside a block.
 
 ### `NotionRichText` component
 
@@ -218,4 +228,4 @@ text block components.
 
 This project is fully Next.js compatible and should possibly most of the times be used with it. It can be completely
 rendered on the server. However the custom block components can as well be server or client components. Both work just
-fine.  
+fine.

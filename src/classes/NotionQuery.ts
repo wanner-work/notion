@@ -1,12 +1,12 @@
+import { Client } from '@notionhq/client'
 import {
   BlockObjectResponse,
   ListBlockChildrenParameters,
   ListBlockChildrenResponse
 } from '@notionhq/client/build/src/api-endpoints'
-import { Client } from '@notionhq/client'
-import NotionQueryOptions from '../interfaces/NotionQueryOptions'
 import NotionBlockObject from '../interfaces/NotionBlockObject'
 import NotionQueryData from '../interfaces/NotionQueryData'
+import NotionQueryOptions from '../interfaces/NotionQueryOptions'
 
 export default class NotionQuery {
   /**
@@ -26,19 +26,26 @@ export default class NotionQuery {
    * @param integrationTokenOrClient
    * @param options
    */
-  constructor(integrationTokenOrClient: string | Client, options?: NotionQueryOptions) {
+  constructor(
+    integrationTokenOrClient: string | Client,
+    options?: NotionQueryOptions
+  ) {
     if (typeof integrationTokenOrClient === 'string') {
       try {
         this.client = new Client({
           auth: integrationTokenOrClient
         })
       } catch (error) {
-        throw new Error(`NotionQuery: The Notion integration token provided is invalid. ${error.message}. Please provide a valid token. https://developers.notion.com/docs/create-a-notion-integration#getting-started`)
+        throw new Error(
+          `NotionQuery: The Notion integration token provided is invalid. ${error.message}. Please provide a valid token. https://developers.notion.com/docs/create-a-notion-integration#getting-started`
+        )
       }
     } else if (typeof integrationTokenOrClient === 'object') {
       this.client = integrationTokenOrClient
     } else {
-      throw new Error('NotionQuery: The Notion integration token is required to query the Notion API. Please provide a valid token. https://developers.notion.com/docs/create-a-notion-integration#getting-started')
+      throw new Error(
+        'NotionQuery: The Notion integration token is required to query the Notion API. Please provide a valid token. https://developers.notion.com/docs/create-a-notion-integration#getting-started'
+      )
     }
 
     if (options?.debug) {
@@ -80,7 +87,9 @@ export default class NotionQuery {
     try {
       response = await this.client.blocks.children.list(args)
     } catch (error) {
-      throw new Error(`NotionQuery: An error occurred while fetching the blocks of the page or the parent block. ${error.message}`)
+      throw new Error(
+        `NotionQuery: An error occurred while fetching the blocks of the page or the parent block. ${error.message}`
+      )
     }
 
     if (response.has_more) {

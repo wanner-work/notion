@@ -1,6 +1,6 @@
 import { ParagraphBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
-import NotionRichText from '../common/NotionRichText'
 import NotionBlockObject from '../../interfaces/NotionBlockObject'
+import NotionRichText from '../common/NotionRichText'
 
 interface Props extends NotionBlockObject<ParagraphBlockObjectResponse> {}
 

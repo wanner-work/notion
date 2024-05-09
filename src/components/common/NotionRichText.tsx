@@ -13,11 +13,7 @@ export default function NotionRichText({ rich_text }: Props) {
           {text.type === 'text' && (
             <>
               {text.text.link ? (
-                <a
-                  href={text.text.link.url}
-                  target="_blank"
-                  rel="no-refferer"
-                >
+                <a href={text.text.link.url} target="_blank" rel="no-refferer">
                   <span
                     className={`${getAnnotationClassNames(text.annotations)} underline`}
                   >
