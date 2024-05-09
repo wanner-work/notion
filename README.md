@@ -1,66 +1,178 @@
 ![notion.](docs/lead.svg)
 
-# notion. 
+# notion.
 
-An opinionated but very flexible notion rendering component.
+An opinionated but highly customizable notion rendering and data fetching toolset.
 
 ## Prerequisites
 
 Only use this package if you are building with [tailwindcss](https://tailwindcss.com/) and the newest version
-of [react](https://react.dev/).
+of [react](https://react.dev/). If you plan to customize the component by your own block components, you should install
+the `@notionhq/client` package as well.
+
+You also need to have a notion account and a notion integration set up. You can find more information on how to set up
+an integration [here](https://developers.notion.com/docs/create-a-notion-integration#getting-started).
 
 ## Installation
 
 1. Install the package using pnpm: `pnpm add @wanner.work/notion`.
 2. Add the following line to your `tailwind.config.js` content configuration: (if not already present from
    different `@wanner.work` components) `"./node_modules/@wanner.work/**/*.{js,ts,jsx,tsx}"`
+3. Add the following lime to your `.env` file: `NOTION_SECRET=your-secret`. This secret is the secret you get from
+   your notion integration. Never share this secret with anyone!
 
 ## Usage
 
-### 1. Using the `Notion` component:
+To render a notion page, we first need to fetch the data from the notion API. With this data, we are then able to render
+it using the designated tools.
+
+### Data Fetching
+
+The notion API is only available from the server side so never try to do this in the frontend.
+
+There are two main ways to fetch data. Either by using the `NotionQuery` class which is provided by this package, or
+the `@notionhq/client` package, which is the official js client from notion. The `NotionQuery`package itself uses
+the `@notionhq/client` inside.
+
+#### Using the `NotionQuery` class:
+
+Using the provided class is straight forward. It does everything for you. All you have to do is provide an integration
+token and a id of a page which you'd like to get the content from.
 
 ```tsx
-import Image from '@wanner.work/image'
+import { NotionQuery } from '@wanner.work/notion'
 
-export default function MyComponent() {
+// initiate the query with the notion secret
+const query = new NotionQuery(process.env.NOTION_SECRET)
+
+// execute it to get the data of the id which is passed as an argument
+const data = await query.execute('the-id-of-the-page')
+```
+
+#### Using the `@notionhq/client` directly:
+
+If you need more control over the data fetching process, you can use the `@notionhq/client` package to fetch the data
+and then use the `NotionQuery` class to transform it. The transformation process is required for the renderer to work as
+expected.
+
+```tsx
+import { Client } from '@notionhq/client'
+import { NotionQuery } from '@wanner.work/notion'
+
+// creating a new api client with the integration token
+const notion = new Client({
+  auth: process.env.NOTION_SECRET
+})
+
+// get all pages from a database or do whatever you'd like to do with the api client.
+const request = (await client.databases.query({
+  database_id: process.env.NOTION_DATABASE_TOKEN as string
+})) as QueryDatabaseResponse
+const results = request.results as PageObjectResponse[]
+
+// get the first page
+const page = results[0]
+
+// get all blocks from the page
+const response = await notion.blocks.children.list({
+  block_id: page.id
+})
+
+// transform the data using the NotionQuery class
+const query = new NotionQuery(process.env.NOTION_SECRET)
+const data = await query.transform(response.results)
+```
+
+### Rendering
+
+After you have the data, you can render it using the provided components.
+
+#### Using the `Notion` component:
+
+The `Notion` component is the easiest to use. Under the hood it is just a wrapper which renders all blocks with
+a `NotionBlock` component.
+
+```tsx
+import Notion from '@wanner.work/notion'
+
+export default function Application() {
+  // get the data using one of the methods above
+
   return (
-    <Image src="https://source.unsplash.com/random" alt="Random image" height={500} width={500}/>
+    <Notion data={data}/>
   )
 }
 ```
 
-### 2. Using the `Image` component with the `ImageProvider` context component somewhere above the `Image` component in the component tree:
+#### Using `NotionBlock` components:
+
+If you somehow need more flexibility, you can also just use `NotionBlock` components directly.
 
 ```tsx
-import Image, { ImageProvider } from '@wanner.work/image'
+import Notion from '@wanner.work/notion'
 
-export default function MyComponent() {
+export default function Application() {
+  // get the data using one of the methods above
+
   return (
-    <ImageProvider loader={<div className="text-white absolute h-full w-full">Loading...</div>}>
-      <Image src="https://source.unsplash.com/random" alt="Random image" height={500} width={500}/>
-    </ImageProvider>
+    {
+      data.map((object) => (<>
+        <NotionBlock key={object.block.id}
+                     block={object.block}
+                     children={object.children}
+                     level={object.level}
+        />
+      </>))
+    }
   )
 }
 ```
 
-## Options
+### Customizing the rendering of the blocks:
 
-### `Image` component
+If you want to customize the rendering of the blocks or if you want to use a block type which is currently not supported
+by the `@wanner.work/notion` package, you can pass a custom block component per type to the `Notion` component.
 
-- `src` (string): The source of the image.
-- `alt` (string): The alt text of the image.
-- `height?` (number): The height of the image. Is required if `fill` is `false`.
-- `width?` (number): The width of the image. Is required if `fill` is `false`.
-- `fill?` (boolean): Whether the image should fill its container. Defaults to `false`.
-- `loading?` ('lazy' | 'eager'): The loading strategy of the image. Defaults to `lazy`.
+```tsx
+import { ImageBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import Notion, { getNotionImageURL, NotionBlockObject } from '@wanner.work/notion'
 
-### `ImageProvider` component
+export default function Application() {
+  // data is the transformed data from the notion API
 
-- `loader?` (ReactNode?): The loader to show while the image is loading. The custom node will be put into a container
-  which has the exact width and height as the image will have.
+  return (
+    <Notion data={data} custom={[{
+      type: 'image',
+      component: MyImageComponent
+    }]}/>
+  )
+}
+
+// to see which props are available you can use the NotionBlockObject interface for your props with the correct generic, 
+// in this case the ImageBlockObjectResponse interface.
+function MyImageComponent({ block, level, children }: NotionBlockObject<ImageBlockObjectResponse>) {
+  return <img src={getNotionImageURL(block.image)} alt={alt}/>
+}
+```
+
+## Built-in block components
+
+The package comes with built-in block components for the following types:
+
+- `paragraph`
+- `heading_1`
+- `heading_2`
+- `heading_3`
+- `audio`
+- `image`
+
+If a type is present in the data but no custom component is passed to the `Notion` component, a warning will
+be rendered.
 
 ## Further information
 
 ### Next.js
 
-The component can be used on Next.js and exposes the 'use client' directive as it uses useEffect, states and context.
+This project is fully Next.js compatible and should possibly most of the times be used with it. It can be completely
+rendered on the server. However the custom block components can as well be server or client components. Both work just
+fine.  

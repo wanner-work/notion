@@ -13,7 +13,8 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w"
+    "dev": "rollup -c -w",
+    "format": "prettier -w ./**/*.{js,ts,tsx,md}"
   },
   "main": "dist/index.js",
   "module": "dist/index.js",
