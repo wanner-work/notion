@@ -1,13 +1,27 @@
 import Notion, { NotionQuery } from '@wanner.work/notion'
 import NotionCallout from '@/components/NotionCallout'
 import NotionImage from '@/components/NotionImage'
+import { Client } from '@notionhq/client'
+import { PageObjectResponse, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
 
-export default async function Home() {
-  const query = new NotionQuery(process.env.NOTION_SECRET as string, {
-    debug: true
+export default async function Own() {
+  const client = new Client({
+    auth: process.env.NOTION_SECRET
   })
 
-  const data = await query.execute('8445e68437d8417fadf6040cb32f6570')
+  const request = (await client.databases.query({
+    database_id: '75b5561e028b4fa1bb54bf1acca761d2'
+  })) as QueryDatabaseResponse
+  const results = request.results as PageObjectResponse[]
+
+  const page = results[0]
+
+  const response = await client.blocks.children.list({
+    block_id: page.id
+  })
+
+  const query = new NotionQuery(client)
+  const data = await query.transform(response)
 
   return (
     <main className="bg-black">
