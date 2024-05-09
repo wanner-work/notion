@@ -42,7 +42,7 @@ token and a id of a page which you'd like to get the content from.
 ```tsx
 import { NotionQuery } from '@wanner.work/notion'
 
-// initiate the query with the notion secret
+// initiate the query with the notion secret or, if you have a notion client already, the client
 const query = new NotionQuery(process.env.NOTION_SECRET)
 
 // execute it to get the data of the id which is passed as an argument
@@ -60,7 +60,7 @@ import { Client } from '@notionhq/client'
 import { NotionQuery } from '@wanner.work/notion'
 
 // creating a new api client with the integration token
-const notion = new Client({
+const client = new Client({
   auth: process.env.NOTION_SECRET
 })
 
@@ -79,7 +79,7 @@ const response = await notion.blocks.children.list({
 })
 
 // transform the data using the NotionQuery class
-const query = new NotionQuery(process.env.NOTION_SECRET)
+const query = new NotionQuery(client)
 const data = await query.transform(response.results)
 ```
 
@@ -155,7 +155,7 @@ function MyImageComponent({ block, level, children }: NotionBlockObject<ImageBlo
 }
 ```
 
-## Built-in block components
+## Currently supported block components
 
 The package comes with built-in block components for the following types:
 
@@ -168,6 +168,49 @@ The package comes with built-in block components for the following types:
 
 If a type is present in the data but no custom component is passed to the `Notion` component, a warning will
 be rendered.
+
+## Helper methods & components
+
+These methods may be imported through `@wanner.work/notion/helper`
+
+### `getNotionImageURL` method
+
+This method is used to get the image URL from a notion image block. It is used by the built-in image block component.
+
+- `image` (ImageBlockObjectResponse['image'] | PageObjectResponse['cover']): The image or cover object inside a block.  
+
+### `NotionRichText` component
+
+This component renders notion rich text, wich is inside of a Paragraph or a Heading block. It is used by the built-in
+text block components.
+
+- `rich_text` (RichTextItemResponse[]): The rich text in the rich text object format of notion.
+
+## Methods & options
+
+### `NotionQuery` class
+
+- `constructor` (integrationTokenOrClient: string | Client, options: { debug?: boolean }): Initialize the class with a
+  token or a active notion client and say, if you'd like to see debug log.
+- `execute` (id: string): Execute the fetch and transform for a certain page or block id.
+- `transform` (response: ListBlockChildrenResponse, level = 0): Transform a ListBlockChildrenResponse which is a response
+  from the notion client to the format which the component can understand.
+- ` transformBlock` (block: BlockObjectResponse, level: number): Transform a single block, which is used by the transform
+  method as well.
+
+### `Notion` component
+
+- `data` (NotionQueryData): The data, transformed by the `NotionQuery` class.
+- `custom` ({ type: 'heading_1' | ..., component: JSX.Element<NotionBlockObject> }[]): An array of custom components per
+  type.
+
+### `NotionBlock` component
+
+- `block` (BlockObjectResponse | ...): The original notion block object
+- `children?` (NotionBlockObject[]): An array of transformed notion blocks which are the children of the block
+- `level?` (number): The level, in which we are currently in.
+- `custom` ({ type: 'heading_1' | ..., component: JSX.Element<NotionBlockObject> }[]): An array of custom components per
+  type.
 
 ## Further information
 

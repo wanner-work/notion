@@ -21,7 +21,27 @@ export default defineConfig([
     },
     {
         input: "src/index.tsx",
-        output: [{file: "dist/types.d.ts", format: "es"}],
+        output: [{file: "dist/index.d.ts", format: "es"}],
+        plugins: [dts()],
+    },
+    {
+        input: "src/helper.tsx",
+        output: [
+            {
+                file: 'helper/index.js',
+                format: "esm",
+                sourcemap: true
+            }
+        ],
+        plugins: [
+            typescript({tsconfig: "./tsconfig.json"}),
+            preserveDirective()
+        ],
+        external: ["react", "react-dom", 'react/jsx-runtime', '@notionhq/client', '@wanner.work/image'],
+    },
+    {
+        input: "src/helper.tsx",
+        output: [{file: "helper/index.d.ts", format: "es"}],
         plugins: [dts()],
     },
 ]);

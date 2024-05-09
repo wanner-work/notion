@@ -23,20 +23,22 @@ export default class NotionQuery {
 
   /**
    * The constructor of the NotionQuery class
-   * @param integrationToken
+   * @param integrationTokenOrClient
    * @param options
    */
-  constructor(integrationToken: string, options?: NotionQueryOptions) {
-    if (!integrationToken) {
+  constructor(integrationTokenOrClient: string | Client, options?: NotionQueryOptions) {
+    if (typeof integrationTokenOrClient === 'string') {
+      try {
+        this.client = new Client({
+          auth: integrationTokenOrClient
+        })
+      } catch (error) {
+        throw new Error(`NotionQuery: The Notion integration token provided is invalid. ${error.message}. Please provide a valid token. https://developers.notion.com/docs/create-a-notion-integration#getting-started`)
+      }
+    } else if (typeof integrationTokenOrClient === 'object') {
+      this.client = integrationTokenOrClient
+    } else {
       throw new Error('NotionQuery: The Notion integration token is required to query the Notion API. Please provide a valid token. https://developers.notion.com/docs/create-a-notion-integration#getting-started')
-    }
-
-    try {
-      this.client = new Client({
-        auth: integrationToken
-      })
-    } catch (error) {
-      throw new Error(`NotionQuery: The Notion integration token provided is invalid. ${error.message}. Please provide a valid token. https://developers.notion.com/docs/create-a-notion-integration#getting-started`)
     }
 
     if (options?.debug) {

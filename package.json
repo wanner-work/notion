@@ -1,7 +1,7 @@
 {
   "author": "@wanner.work",
   "name": "@wanner.work/notion",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "type": "module",
   "homepage": "https://github.com/wanner-work/notion",
@@ -9,7 +9,7 @@
   "bugs": "https://github.com/wanner-work/notion/issues",
   "files": [
     "dist/*",
-    "src/**/*"
+    "helper/*"
   ],
   "scripts": {
     "build": "rollup -c",
@@ -18,15 +18,14 @@
   },
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "types": "dist/types.d.ts",
+  "types": "dist/index.d.ts",
   "peerDependencies": {
     "react": ">= 18",
     "react-dom": ">= 18"
   },
   "dependencies": {
     "@notionhq/client": "^2.2.15",
-    "@wanner.work/image": "^1.1.2",
-    "jotai": "^2.8.0"
+    "@wanner.work/image": "^1.1.2"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.6",
