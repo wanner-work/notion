@@ -2,7 +2,7 @@ import NotionBlockObject from '../../interfaces/NotionBlockObject'
 
 export default function NotionDefault({ block }: NotionBlockObject) {
   return (
-    <div className="bg-amber-300/20 p-5 mt-5 text-amber-300 font-mono rounded">
+    <div className="bg-amber-300/20 p-5 my-5 text-amber-300 font-mono rounded">
       <p className="font-bold mb-3">Unsuported type</p>
       <p className="mb-1 text-sm">
         The block type{' '}

@@ -6,7 +6,7 @@ interface Props extends NotionBlockObject<ParagraphBlockObjectResponse> {}
 
 export default function NotionParagraph({ block }: Props) {
   return (
-    <p className="mb-5 leading-6 font-light text-base text-light tracking-wider">
+    <p className="mb-5 leading-6 font-light text-base text-white/70 tracking-wider">
       <NotionRichText rich_text={block.paragraph.rich_text} />
     </p>
   )

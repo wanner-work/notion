@@ -45,7 +45,7 @@ export default function NotionBlock({
   }
 
   return (
-    <Suspense fallback="loading...">
+    <Suspense>
       <Component block={block} level={level} children={children} />
     </Suspense>
   )
