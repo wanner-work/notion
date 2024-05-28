@@ -1,7 +1,7 @@
 {
   "author": "@wanner.work",
   "name": "@wanner.work/notion",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "license": "MIT",
   "type": "module",
   "homepage": "https://github.com/wanner-work/notion",
