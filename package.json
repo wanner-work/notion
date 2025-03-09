@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "@notionhq/client": "^2.2.15",
-    "@wanner.work/image": "^1.1.2"
+    "@wanner.work/image": "^1.1.2",
+    "ohash": "^2.0.11"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.6",

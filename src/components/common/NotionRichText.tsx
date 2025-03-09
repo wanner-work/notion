@@ -1,5 +1,7 @@
 import { RichTextItemResponse } from '@notionhq/client/build/src/api-endpoints'
 import getAnnotationClassNames from '../../methods/classNames/getAnnotationClassNames'
+import {Fragment} from 'react'
+import {hash} from 'ohash'
 
 interface Props {
   rich_text: RichTextItemResponse[]
@@ -9,7 +11,7 @@ export default function NotionRichText({ rich_text }: Props) {
   return (
     <>
       {rich_text.map((text) => (
-        <>
+        <Fragment key={hash(text)}>
           {text.type === 'text' && (
             <>
               {text.text.link ? (
@@ -27,7 +29,7 @@ export default function NotionRichText({ rich_text }: Props) {
               )}
             </>
           )}
-        </>
+        </Fragment>
       ))}
     </>
   )
