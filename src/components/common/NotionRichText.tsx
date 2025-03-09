@@ -1,7 +1,7 @@
 import { RichTextItemResponse } from '@notionhq/client/build/src/api-endpoints'
+import { hash } from 'ohash'
+import { Fragment } from 'react'
 import getAnnotationClassNames from '../../methods/classNames/getAnnotationClassNames'
-import {Fragment} from 'react'
-import {hash} from 'ohash'
 
 interface Props {
   rich_text: RichTextItemResponse[]

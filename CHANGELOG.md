@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Exporting the NotionQueryData interface in `@wanner.work/notion/helper` to allow for custom queries.
 
 ## Fixed
- 
+
 - Adding a margin bottom to the `NotionDefault` component to prevent it from sticking to the next element.
 - Removing `text-light` because light is not a valid text color in tailwindcss.
 - Removing `fallback="loading..."` from suspense inside of `NotionBlock` to preventing weird loading text.
