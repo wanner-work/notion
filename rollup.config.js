@@ -19,7 +19,8 @@ export default defineConfig([
       'react-dom',
       'react/jsx-runtime',
       '@notionhq/client',
-      '@wanner.work/image'
+      '@wanner.work/image',
+      'ohash'
     ]
   },
   {
@@ -42,7 +43,8 @@ export default defineConfig([
       'react-dom',
       'react/jsx-runtime',
       '@notionhq/client',
-      '@wanner.work/image'
+      '@wanner.work/image',
+      'ohash'
     ]
   },
   {
