@@ -1,8 +1,10 @@
-![notion.](docs/lead.svg)
+![notion.](assets/lead.svg)
 
 # notion.
 
-An opinionated but highly customizable notion rendering and data fetching toolset.
+The all-in-one toolkit to build React applications using Notion as your CMS.
+
+[Visit the documentation!](https://wanner.work/notion)
 
 ## Prerequisites
 
