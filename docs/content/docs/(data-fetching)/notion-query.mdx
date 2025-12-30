@@ -1,0 +1,59 @@
+---
+title: Using NotionQuery
+description: How to fetch Notion page content using NotionQuery
+---
+
+The `NotionQuery` class is the preferred way to fetch Notion page content using this package. It provides a simple and convenient interface to interact with Notion's API and retrieve the content of a Notion page.
+
+<Callout type="warning" title="Server Side Requests">
+  Make sure to use the `NotionQuery` class on the server side only, as Notion's API requires the request to be made from
+  a secure environment.
+</Callout>
+
+If you need more control over the data fetching process, you can use the `@notionhq/client` package to fetch the data
+and then use the `NotionQuery` class to transform it. Refer to [Using the `@notionhq/client`](./notion-client) for more details.
+
+## Usage
+
+### Initializing NotionQuery
+
+First, import the `NotionQuery` class from the package and create an instance of it by providing your Notion integration token which you get if you [create a notion integration](./getting-started/preparing-notion).
+
+```tsx
+import { NotionQuery } from '@wanner.work/notion'
+
+// initiate the query with the notion secret or, if you have a notion client already, the client
+const query = new NotionQuery(process.env.NOTION_SECRET)
+```
+
+Alternatively, if you already have a Notion client instance from the `@notionhq/client` package, you can pass that instead:
+
+```tsx
+import { Client } from '@notionhq/client'
+import { NotionQuery } from '@wanner.work/notion'
+
+// creating a new api client with the integration token
+const client = new Client({
+  auth: process.env.NOTION_SECRET
+})
+
+// initiate the query with the existing client
+const query = new NotionQuery(client)
+```
+
+### Querying a Notion page
+
+To fetch the content of a Notion page, use the `execute` method of the `NotionQuery` instance, passing the page ID as an argument:
+
+```tsx
+import { NotionQuery } from '@wanner.work/notion'
+
+const query = new NotionQuery(process.env.NOTION_SECRET)
+const data = await query.execute('the-id-of-the-page')
+```
+
+This will return the transformed Notion page content that you can then use with the `Notion` component to render the content in your React application.
+
+<Callout type="info" title="Page ID">
+  Refer to [Find the Notion page ID](./understand-notion-ids) to learn how to get the ID of a Notion page.
+</Callout>

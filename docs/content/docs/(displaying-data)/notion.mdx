@@ -1,0 +1,58 @@
+---
+title: Rendering the data
+description: How to display Notion page content using the Notion component
+---
+
+The `Notion` component is the main component provided by this package to display
+Notion page content in your React application. It takes the transformed Notion
+data (which you can get using the `NotionQuery` class) and renders it using built-in
+or configured components.
+
+## Usage
+
+### Using the `Notion` component:
+
+```tsx
+import Notion from '@wanner.work/notion'
+
+export default function Application() {
+  // get the data using one of the methods explained
+
+  return <Notion data={data} />
+}
+```
+
+### Using the `NotionBlock` component:
+
+If you somehow need more flexibility, you can also just use `NotionBlock` components directly.
+
+```tsx
+import NotionBlock from '@wanner.work/notion'
+
+export default function Application() {
+  // get the data using one of the methods explained
+
+  return data.map((object) => (
+    <NotionBlock key={object.block.id}
+      block={object.block}
+      children={object.children}
+      level={object.level}
+    />
+  ))
+}
+```
+
+## Currently supported block components
+
+The package comes with built-in block components for the following types:
+
+- `paragraph`
+- `heading_1`
+- `heading_2`
+- `heading_3`
+- `audio`
+- `image`
+
+It is by design that the block components are kept minimalistic to allow you to
+customize the rendering as you like. If you need more block types or want to
+customize the rendering, please refer to the [Customizing the rendering](./custom-components) guide.

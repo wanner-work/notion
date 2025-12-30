@@ -1,4 +1,18 @@
 {
   "title": "Documentation",
-  "root": true
+  "root": true,
+  "pages": [
+    "---Introduction---",
+    "index",
+    "getting-started",
+    "---Resolving data---",
+    "(data-fetching)/notion-query",
+    "(data-fetching)/notion-client",
+    "(data-fetching)/understand-notion-ids",
+    "---Rendering data---",
+    "(displaying-data)/notion",
+    "(displaying-data)/custom-components",
+    "---Version History---",
+    "(versions)/changelog"
+  ]
 }

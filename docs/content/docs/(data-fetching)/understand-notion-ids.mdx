@@ -1,0 +1,43 @@
+---
+title: Finding Notion Ids
+description: Where to find the page ID of a Notion pages and blocks
+---
+
+To fetch content from a Notion page using the Notion API, you need to know the page ID or database ID of the page or
+database you want to access. And sometimes you may also need to know the block ID of a specific block inside a page.
+
+## Finding Notion IDs
+
+Notion IDs are unique identifiers for pages, databases, and blocks within Notion. They are typically represented as a
+string of alphanumeric characters separated by hyphens. Here's how you can find these IDs:
+
+### Page ID
+
+To find the Page ID of a Notion page, follow these steps:
+
+1. Open the Notion page in your web browser.
+2. Look at the URL in the address bar. The URL will look something like this:
+   `https://www.notion.so/your-workspace/your-title-8b3ds73349924972a2677f874ee33cdc`
+3. The Page ID is the last part of the URL after the last hyphen. In this example, the Page ID is
+   `8b3ds73349924972a2677f874ee33cdc`.
+
+### Database ID
+
+To find the Database ID of a Notion database, follow these steps:
+
+1. Open the Notion database in your web browser.
+2. Look at the URL in the address bar. The URL will look something like this:
+   `https://www.notion.so/your-workspace/your-database-title-3f5g6h7j8k9l0m1n2o3p4q5r6s7t8u9v0`
+3. The Database ID is the last part of the URL after the last hyphen. In this example, the Database ID is
+   `3f5g6h7j8k9l0m1n2o3p4q5r6s7t8u9v0`.
+
+### Block ID
+
+To find the Block ID of a specific block within a Notion page, follow these steps:
+
+1. Open the Notion page containing the block in your web browser.
+2. Right-click on the block you want to find the ID for and select "Copy link" from the context menu.
+3. Paste the copied link into a text editor. The link will look something like this:
+   `https://www.notion.so/your-workspace/your-title-8b3ds73349924972a2677f874ee33cdc?pvs=4#b1c2d3e4f5g6h7i8j90k1l2m3n4o5p6`
+4. The Block ID is the part of the URL after the `#` symbol. In this example, the Block ID is
+   `b1c2d3e4f5g6h7i8j90k1l2m3n4o5p6`.
