@@ -1,43 +1,37 @@
 {
-  "author": "@wanner.work",
   "name": "@wanner.work/notion",
-  "version": "1.2.0",
-  "license": "MIT",
-  "type": "module",
+  "version": "2.0.0",
   "homepage": "https://github.com/wanner-work/notion",
-  "repository": "https://github.com/wanner-work/notion",
   "bugs": "https://github.com/wanner-work/notion/issues",
+  "license": "MIT",
+  "author": "@wanner.work",
+  "repository": "https://github.com/wanner-work/notion",
   "files": [
-    "dist/*",
-    "helper/*"
+    "dist/*"
   ],
-  "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "format": "prettier . -w"
-  },
+  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "peerDependencies": {
-    "react": ">= 18",
-    "react-dom": ">= 18"
+  "scripts": {
+    "build": "rolldown -c",
+    "dev": "rolldown -c -w",
+    "format": "oxfmt . --write"
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.15",
-    "@wanner.work/image": "^1.1.2",
+    "@notionhq/client": "^5.6.0",
     "ohash": "^2.0.11"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
-    "prettier": "^3.2.5",
-    "prettier-plugin-organize-imports": "^3.2.4",
-    "rollup": "^4.35.0",
-    "rollup-plugin-dts": "^6.1.0",
-    "rollup-preserve-directives": "^1.1.1",
-    "tslib": "^2.6.2",
-    "typescript": "^5.4.5"
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "oxfmt": "^0.21.0",
+    "rolldown": "1.0.0-beta.57",
+    "rolldown-plugin-dts": "^0.20.0",
+    "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "react": ">= 18",
+    "react-dom": ">= 18"
   }
 }
