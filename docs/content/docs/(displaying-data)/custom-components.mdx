@@ -77,3 +77,8 @@ export default function Application() {
   )
 }
 ```
+
+<Callout type="info" title="Why not a context?">
+  You might wonder why the config is passed via props instead of using a React context. The reason is that using context would
+  break server-side rendering and static site generation, as the context would not be available during the initial render on the server.
+</Callout>

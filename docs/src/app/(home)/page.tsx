@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import NotionLogo from '@/components/logos/NotionLogo'
 import ReactLogo from '@/components/logos/ReactLogo'
 
@@ -24,8 +23,7 @@ export default function HomePage() {
 
       <div className="mt-12">
         <p className="max-w-64 text-neutral-600 dark:text-neutral-400">
-          The all-in-one toolkit to build React applications using Notion as
-          your CMS.
+          The 4kb, all-in-one toolkit to build React applications using Notion as your CMS.
         </p>
       </div>
 

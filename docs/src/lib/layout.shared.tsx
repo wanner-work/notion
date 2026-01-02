@@ -1,4 +1,4 @@
-import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
+import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared'
 
 export function baseOptions(): BaseLayoutProps {
   return {
@@ -7,7 +7,7 @@ export function baseOptions(): BaseLayoutProps {
       title: (
         <div>
           <p className="text-neutral-600 font-mono">
-            notion<span className="text-black font-bold pl-0.5">x</span>
+            @wanner.work/<span className="font-bold pl-0.5">notion</span>
           </p>
         </div>
       )

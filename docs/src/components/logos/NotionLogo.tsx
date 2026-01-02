@@ -1,6 +1,6 @@
 import LogoProps from '@/interfaces/logos/LogoProps'
 
-export default function NotionLogo ({ size = 24 }: LogoProps) {
+export default function NotionLogo({ size = 24 }: LogoProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

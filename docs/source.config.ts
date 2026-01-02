@@ -1,9 +1,4 @@
-import {
-  defineConfig,
-  defineDocs,
-  frontmatterSchema,
-  metaSchema,
-} from 'fumadocs-mdx/config';
+import { defineConfig, defineDocs, frontmatterSchema, metaSchema } from 'fumadocs-mdx/config'
 import remarkDirective from 'remark-directive'
 
 // You can customise Zod schemas for frontmatter and `meta.json` here
@@ -13,13 +8,13 @@ export const docs = defineDocs({
   docs: {
     schema: frontmatterSchema,
     postprocess: {
-      includeProcessedMarkdown: true,
-    },
+      includeProcessedMarkdown: true
+    }
   },
   meta: {
-    schema: metaSchema,
+    schema: metaSchema
   }
-});
+})
 
 export default defineConfig({
   mdxOptions: {

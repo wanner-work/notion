@@ -1,3 +1,3 @@
 export default interface LogoProps {
-  size?: number;
+  size?: number
 }
