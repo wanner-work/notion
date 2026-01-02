@@ -13,9 +13,7 @@ The `NotionQuery` class is the preferred way to fetch Notion page content using 
 If you need more control over the data fetching process, you can use the `@notionhq/client` package to fetch the data
 and then use the `NotionQuery` class to transform it. Refer to [Using the `@notionhq/client`](./notion-client) for more details.
 
-## Usage
-
-### Initializing NotionQuery
+## Initializing NotionQuery
 
 First, import the `NotionQuery` class from the package and create an instance of it by providing your Notion integration token which you get if you [create a notion integration](./getting-started/preparing-notion).
 
@@ -41,15 +39,18 @@ const client = new Client({
 const query = new NotionQuery(client)
 ```
 
-### Querying a Notion page
+## Querying a Notion page
 
-To fetch the content of a Notion page, use the `execute` method of the `NotionQuery` instance, passing the page ID as an argument:
+To fetch the content of a Notion page, use the `retrievePage` method of the `NotionQuery` instance, passing the page ID as an argument:
 
 ```tsx
 import { NotionQuery } from '@wanner.work/notion'
 
 const query = new NotionQuery(process.env.NOTION_SECRET)
-const data = await query.execute('the-id-of-the-page')
+const {
+  page,
+  data
+} = await query.retrievePage('the-id-of-the-page')
 ```
 
 This will return the transformed Notion page content that you can then use with the `Notion` component to render the content in your React application.

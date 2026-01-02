@@ -15,44 +15,47 @@ that config file wherever you use the `Notion` component.
 import { NotionRenderConfig } from "@wanner.work";
 
 export default {
-  blocks: []
+  blocks: [],
+  hideUnsupportedBlockWarning: false
 } satisfies NotionRenderConfig
 ```
 
 ## Custom block components
 
 <Callout type="info" title="Custom File">
-  Allthough you can define your custom block components directly in the config file, it is recommended
+  Although you can define your custom block components directly in the config file, it is recommended
   to create a separate file for each component for better maintainability.
 </Callout>
 
 After creating the config file, create a custom block component for each block variant you want to customize.
 
-```tsx title="NotionImageBlock.tsx"
-import { NotionBlockProps } from "@wanner.work";
-import { getNotionImageURL } from "@wanner.work/helper";
-import { ImageBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+```tsx title="NotionCalloutBlock.tsx"
+import { CalloutBlockObjectResponse } from '@notionhq/client'
+import { NotionBlockObject, NotionRichText } from '@wanner.work/notion'
 
-function NotionImageBlock({
+export default function NotionCalloutBlock({
   block,
-  level,
-  children
-}: NotionBlockProps<ImageBlockObjectResponse>) {
-  return <img src={getNotionImageURL(block.image)} alt="test" />
+}: Readonly<NotionBlockObject<CalloutBlockObjectResponse>>) {
+  return (
+    <div className="mb-5 mt-6 rounded-xl bg-neutral-100 px-6 py-4 font-light text-black">
+      <NotionRichText rich_text={block.callout.rich_text} />
+    </div>
+  )
 }
+
 ```
 
 Then, import the custom block component in your config file and add it to the `blocks` array.
 
 ```tsx title="notion.config.tsx"
 import { NotionRenderConfig } from "@wanner.work";
-import NotionImageBlock from "./NotionImageBlock";
+import NotionCalloutBlock from "./NotionCalloutBlock";
 
 export default {
   blocks: [
     {
-      type: "image",
-      component: NotionImageBlock
+      type: "callout",
+      component: NotionCalloutBlock
     }
   ]
 } satisfies NotionRenderConfig

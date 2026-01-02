@@ -10,14 +10,18 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
+    "@wanner.work/notion": "../",
     "fumadocs-core": "16.4.1",
     "fumadocs-mdx": "14.2.3",
+    "fumadocs-typescript": "^5.0.1",
     "fumadocs-ui": "16.4.1",
     "lucide-react": "^0.561.0",
     "next": "16.0.10",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "remark-directive": "^4.0.0"
+    "remark-directive": "^4.0.0",
+    "shiki": "^3.20.0",
+    "ts-morph": "^27.0.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",

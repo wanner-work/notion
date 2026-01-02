@@ -12,6 +12,12 @@
     "---Rendering data---",
     "(displaying-data)/notion",
     "(displaying-data)/custom-components",
+    "---API---",
+    "(api)/notion-query",
+    "(api)/notion-parser",
+    "(api)/notion-component",
+    "(api)/notion-block-component",
+    "(api)/notion-render-config",
     "---Version History---",
     "(versions)/changelog"
   ]

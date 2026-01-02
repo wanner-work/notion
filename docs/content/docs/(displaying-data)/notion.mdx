@@ -8,7 +8,7 @@ Notion page content in your React application. It takes the transformed Notion
 data (which you can get using the `NotionQuery` class) and renders it using built-in
 or configured components.
 
-## Usage
+## Render a page
 
 ### Using the `Notion` component:
 
@@ -42,7 +42,7 @@ export default function Application() {
 }
 ```
 
-## Currently supported block components
+### Currently supported block components
 
 The package comes with built-in block components for the following types:
 
@@ -50,9 +50,43 @@ The package comes with built-in block components for the following types:
 - `heading_1`
 - `heading_2`
 - `heading_3`
-- `audio`
-- `image`
 
-It is by design that the block components are kept minimalistic to allow you to
+It is by design that the block components are kept minimalistic and unstyled to allow you to
 customize the rendering as you like. If you need more block types or want to
 customize the rendering, please refer to the [Customizing the rendering](./custom-components) guide.
+
+## Rendering page and database information
+
+To render page or database information such as titles or properties, you can use the `NotionParser` class. This class
+provides methods to parse various titles and properties of a Notion page or database.
+
+### Example
+
+```tsx
+import { NotionQuery, NotionParser } from '@wanner.work/notion'
+
+const query = new NotionQuery(process.env.NOTION_SECRET)
+const page = await query.retrievePageInformation('the-id-of-the-page')
+
+NotionParser.getPageTitle(page) // this returns the title of the page
+```
+
+See the [NotionParser API reference](./api/notion-parser) for all available methods.
+
+## Rendering a rich text object
+
+@wanner.work/notion also provides a `NotionRichText` component to render Notion rich text objects. This component takes care of rendering the text with the appropriate styles and annotations.
+
+### Using NotionRichText
+
+```tsx
+import { NotionQuery, NotionParser, NotionRichText } from '@wanner.work/notion'
+
+const query = new NotionQuery(process.env['NOTION-SECRET']!)
+
+const database = await query.retrieveDatabaseInformation(process.env['NOTION-PLAYGROUND-DATABASE']!)
+
+return <p>
+  <NotionRichText rich_text={database.description} />
+</p>
+```

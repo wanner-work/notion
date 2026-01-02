@@ -3,7 +3,7 @@ import { baseOptions } from '@/lib/layout.shared'
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
-    <HomeLayout {...baseOptions()} nav={undefined}>
+    <HomeLayout {...baseOptions()}>
       {children}
     </HomeLayout>
   )

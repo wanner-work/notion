@@ -23,12 +23,12 @@ export default function HomePage() {
 
       <div className="mt-12">
         <p className="max-w-64 text-neutral-600 dark:text-neutral-400">
-          The 4kb, all-in-one toolkit to build React applications using Notion as your CMS.
+          The {'>'}7KB, all-in-one toolkit to build React applications using Notion as your CMS.
         </p>
       </div>
 
       <div className="mt-12 flex gap-3">
-        <a href="/docs" className="rounded-full bg-neutral-950 text-white px-5 py-3 font-medium">
+        <a href="/docs" className="rounded-full bg-neutral-950 dark:bg-neutral-50 text-white dark:text-black px-5 py-3 font-medium">
           Documentation
         </a>
       </div>
