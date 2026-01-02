@@ -28,7 +28,10 @@ export default function HomePage() {
       </div>
 
       <div className="mt-12 flex gap-3">
-        <a href="/docs" className="rounded-full bg-neutral-950 dark:bg-neutral-50 text-white dark:text-black px-5 py-3 font-medium">
+        <a
+          href="/docs"
+          className="rounded-full bg-neutral-950 dark:bg-neutral-50 text-white dark:text-black px-5 py-3 font-medium"
+        >
           Documentation
         </a>
       </div>

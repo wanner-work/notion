@@ -4,7 +4,6 @@ import {
 } from '@notionhq/client/build/src/api-endpoints'
 
 export default class NotionParser {
-
   /**
    * Extracts and returns the title of a Notion database.
    *
@@ -127,10 +126,7 @@ export default class NotionParser {
    * @param properties
    * @param name
    */
-  public static getSelectPageProperty(
-    properties: PageObjectResponse['properties'],
-    name: string
-  ) {
+  public static getSelectPageProperty(properties: PageObjectResponse['properties'], name: string) {
     const property = properties[name]
     if (property && property.type === 'select' && property.select) {
       return property.select

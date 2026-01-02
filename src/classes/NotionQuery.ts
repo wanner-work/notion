@@ -61,7 +61,10 @@ export default class NotionQuery {
    * @param databaseId
    * @param options
    */
-  public async retrieveDatabase(databaseId: string, options?: Omit<GetDatabaseParameters, 'database_id'>) {
+  public async retrieveDatabase(
+    databaseId: string,
+    options?: Omit<GetDatabaseParameters, 'database_id'>
+  ) {
     this.log('Retrieve database and entries for id', databaseId)
 
     const [database, entries] = await Promise.all([

@@ -6,9 +6,13 @@ import {
 import NotionBlockObject from '../../interfaces/NotionBlockObject'
 import NotionRichText from '../common/NotionRichText'
 
-export default function NotionHeading({ block }: Readonly<NotionBlockObject<
+export default function NotionHeading({
+  block
+}: Readonly<
+  NotionBlockObject<
     Heading1BlockObjectResponse | Heading2BlockObjectResponse | Heading3BlockObjectResponse
->>) {
+  >
+>) {
   switch (block.type) {
     case 'heading_1':
       return (

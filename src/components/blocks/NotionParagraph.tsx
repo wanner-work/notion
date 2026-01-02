@@ -2,7 +2,9 @@ import { ParagraphBlockObjectResponse } from '@notionhq/client/build/src/api-end
 import NotionBlockObject from '../../interfaces/NotionBlockObject'
 import NotionRichText from '../common/NotionRichText'
 
-export default function NotionParagraph({ block }: Readonly<NotionBlockObject<ParagraphBlockObjectResponse>>) {
+export default function NotionParagraph({
+  block
+}: Readonly<NotionBlockObject<ParagraphBlockObjectResponse>>) {
   return (
     <p>
       <NotionRichText rich_text={block.paragraph.rich_text} />

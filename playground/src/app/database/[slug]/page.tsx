@@ -1,6 +1,6 @@
 import Notion, { NotionQuery, NotionParser } from '@wanner.work/notion'
 import notionConfig from '@/notion.config'
-import {notFound} from "next/dist/client/components/not-found";
+import { notFound } from 'next/dist/client/components/not-found'
 
 interface Props {
   params: Promise<{
@@ -8,8 +8,8 @@ interface Props {
   }>
 }
 
-export default async function DatabaseEntry({ params}: Props) {
-  const { slug } = await params;
+export default async function DatabaseEntry({ params }: Props) {
+  const { slug } = await params
 
   const query = new NotionQuery(process.env['NOTION-SECRET']!, {
     debug: true
@@ -17,11 +17,11 @@ export default async function DatabaseEntry({ params}: Props) {
 
   const entries = await query.retrieveDatabaseEntries(process.env['NOTION-PLAYGROUND-DATABASE']!, {
     filter: {
-      "and": [
+      and: [
         {
-          "property": "Slug",
-          "rich_text": {
-            "equals": slug
+          property: 'Slug',
+          rich_text: {
+            equals: slug
           }
         }
       ]

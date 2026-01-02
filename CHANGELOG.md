@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Improving the `NotionQuery` class to support database queries and many more query options.
 - Adding `NotionParser` class with static methods to parse page properties from Notion API responses.
-- Adding a `NotionRenderConfig` interface to allow for better configuration of the `Notion` component and support hiding the 
+- Adding a `NotionRenderConfig` interface to allow for better configuration of the `Notion` component and support hiding the
   unsupported block warning.
 - Upgrade the Notion API client to the latest version.
 - Cleanup codebase and use the official notion types where possible.
