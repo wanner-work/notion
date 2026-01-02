@@ -15,9 +15,6 @@
     "---API---",
     "(api)/notion-query",
     "(api)/notion-parser",
-    "(api)/notion-component",
-    "(api)/notion-block-component",
-    "(api)/notion-render-config",
     "---Version History---",
     "(versions)/changelog"
   ]

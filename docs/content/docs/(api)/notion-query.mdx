@@ -2,4 +2,17 @@
 title: NotionQuery
 ---
 
-Coming soon...
+## Usage
+
+```ts
+import { NotionQuery } from '@wanner.work/notion';
+
+// pass your Notion integration token or a Notion client object
+const query = new NotionQuery(process.env['NOTION_API_KEY']!);
+```
+
+<Card icon={<MousePointerClick />} title="More examples" description="View this page to see more examples" href="/docs/notion-query/index"/>
+
+## Type Reference
+
+<AutoTypeTable path="./src/interfaces/temp/NotionQuery.ts" name="NotionQuery" />
