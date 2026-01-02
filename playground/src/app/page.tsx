@@ -1,33 +1,22 @@
-import NotionCallout from '@/components/NotionCallout'
-import NotionImage from '@/components/NotionImage'
-import Notion, { NotionQuery } from '@wanner.work/notion'
+import Notion, { NotionQuery, NotionParser } from '@wanner.work/notion'
+import notionConfig from "@/notion.config";
 
 export default async function Home() {
-  const query = new NotionQuery(process.env.NOTION_SECRET as string, {
-    debug: true
-  })
+  const query = new NotionQuery(process.env['NOTION-SECRET']!)
 
-  const data = await query.execute('8445e68437d8417fadf6040cb32f6570')
+  const {
+    page,
+    data
+  } = await query.retrievePage(process.env['NOTION-PLAYGROUND-PAGE']!)
 
   return (
-    <main className="bg-black">
-      <div className="min-h-screen w-screen bg-black text-white">
-        <div className="p-8">
-          <Notion
-            data={data}
-            custom={[
-              {
-                type: 'callout',
-                component: NotionCallout
-              },
-              {
-                type: 'image',
-                component: NotionImage
-              }
-            ]}
-          />
-        </div>
-      </div>
-    </main>
+    <div className="max-w-2xl mx-auto py-10 px-4">
+      <article className="prose prose-neutral lg:prose-xl">
+        <h1>
+          {NotionParser.getPageTitle(page)}
+        </h1>
+        <Notion data={data} config={notionConfig} />
+      </article>
+    </div>
   )
 }
