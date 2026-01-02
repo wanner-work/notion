@@ -1,36 +1,27 @@
-import { RichTextItemResponse } from '@notionhq/client/build/src/api-endpoints'
-import { hash } from 'ohash'
-import { Fragment } from 'react'
-import getAnnotationClassNames from '../../methods/classNames/getAnnotationClassNames'
+import {hash} from 'ohash'
+import {Fragment} from 'react'
+import {RichTextItemResponse} from '@notionhq/client'
+import NotionRichTextAnnotations from "./NotionRichTextAnnotations";
 
 interface Props {
   rich_text: RichTextItemResponse[]
 }
 
-export default function NotionRichText({ rich_text }: Props) {
-  return (
-    <>
-      {rich_text.map((text) => (
-        <Fragment key={hash(text)}>
-          {text.type === 'text' && (
+export default function NotionRichText({rich_text}: Readonly<Props>) {
+  return rich_text.map((text, index) => (
+      <Fragment key={hash({text, index})}>
+        {text.type === 'text' && (
             <>
               {text.text.link ? (
-                <a href={text.text.link.url} target="_blank" rel="no-refferer">
-                  <span
-                    className={`${getAnnotationClassNames(text.annotations)} underline`}
-                  >
-                    {text.text.content}
-                  </span>
-                </a>
+                  <a href={text.text.link.url} target="_blank"
+                     rel="no-refferer">
+                    <NotionRichTextAnnotations rich_text={text}/>
+                  </a>
               ) : (
-                <span className={getAnnotationClassNames(text.annotations)}>
-                  {text.text.content}
-                </span>
+                  <NotionRichTextAnnotations rich_text={text}/>
               )}
             </>
-          )}
-        </Fragment>
-      ))}
-    </>
-  )
+        )}
+      </Fragment>
+  ))
 }

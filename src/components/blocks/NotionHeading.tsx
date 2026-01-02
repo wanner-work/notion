@@ -6,32 +6,27 @@ import {
 import NotionBlockObject from '../../interfaces/NotionBlockObject'
 import NotionRichText from '../common/NotionRichText'
 
-interface Props
-  extends NotionBlockObject<
-    | Heading1BlockObjectResponse
-    | Heading2BlockObjectResponse
-    | Heading3BlockObjectResponse
-  > {}
-
-export default function NotionHeading({ block }: Props) {
+export default function NotionHeading({ block }: Readonly<NotionBlockObject<
+    Heading1BlockObjectResponse | Heading2BlockObjectResponse | Heading3BlockObjectResponse
+>>) {
   switch (block.type) {
     case 'heading_1':
       return (
-        <h2 className={`text-3xl text-white mb-8 mt-10`}>
+        <h1>
           <NotionRichText rich_text={block.heading_1.rich_text} />
-        </h2>
+        </h1>
       )
     case 'heading_2':
       return (
-        <h3 className={`text-2xl text-white mb-6 mt-10`}>
+        <h2>
           <NotionRichText rich_text={block.heading_2.rich_text} />
-        </h3>
+        </h2>
       )
     case 'heading_3':
       return (
-        <h4 className={`text-xl text-white mb-4 mt-8`}>
+        <h3>
           <NotionRichText rich_text={block.heading_3.rich_text} />
-        </h4>
+        </h3>
       )
   }
 }

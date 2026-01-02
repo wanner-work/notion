@@ -2,11 +2,9 @@ import { ParagraphBlockObjectResponse } from '@notionhq/client/build/src/api-end
 import NotionBlockObject from '../../interfaces/NotionBlockObject'
 import NotionRichText from '../common/NotionRichText'
 
-interface Props extends NotionBlockObject<ParagraphBlockObjectResponse> {}
-
-export default function NotionParagraph({ block }: Props) {
+export default function NotionParagraph({ block }: Readonly<NotionBlockObject<ParagraphBlockObjectResponse>>) {
   return (
-    <p className="mb-5 leading-6 font-light text-base text-white/70 tracking-wider">
+    <p>
       <NotionRichText rich_text={block.paragraph.rich_text} />
     </p>
   )

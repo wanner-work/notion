@@ -1,30 +1,60 @@
 import NotionBlockObject from '../../interfaces/NotionBlockObject'
 
-export default function NotionDefault({ block }: NotionBlockObject) {
+export default function NotionDefault({ block, config }: Readonly<NotionBlockObject>) {
+  if (config.hideUnsupportedBlockWarning) {
+    return null
+  }
+
   return (
-    <div className="bg-amber-300/20 p-5 my-5 text-amber-300 font-mono rounded">
-      <p className="font-bold mb-3">Unsuported type</p>
-      <p className="mb-1 text-sm">
-        The block type{' '}
-        <span className="p-1 bg-black/40 text-white/70 text-[12px] rounded">
-          {block.type}
-        </span>{' '}
-        is currently not supported by{' '}
-        <span className="p-1 bg-black/40 text-white/70 text-[12px] rounded">
-          @wanner.work/notion
-        </span>
-        . But you can still render it by creating a custom component.
-      </p>
-      <p className="text-sm">
-        See{' '}
-        <a
-          className="underline"
-          href="https://github.com/wanner-work/notion?tab=readme-ov-file#customizing-the-rendering-of-the-blocks"
-          target="_blank"
+    <div
+      style={{
+        border: '1px solid #e3e3e3',
+        padding: '1rem',
+        borderRadius: '0.5rem',
+        backgroundColor: '#f8f8f8'
+      }}
+    >
+      <p
+        style={{
+          fontSize: '16px',
+          fontWeight: 'bold',
+          marginTop: 0,
+          marginBottom: '6px'
+        }}
+      >
+        Unsuported type:{' '}
+        <span
+          style={{
+            fontStyle: 'italic'
+          }}
         >
-          https://github.com/wanner-work/notion?tab=readme-ov-file#customizing-the-rendering-of-the-blocks
+          {block.type}
+        </span>
+      </p>
+      <p
+        style={{
+          fontSize: '14px',
+          marginTop: 0,
+          marginBottom: '6px'
+        }}
+      >
+        The block type <span>{block.type}</span> is currently not supported by{' '}
+        <span>@wanner.work/notion</span>. But you can still render it by creating a custom
+        component.
+      </p>
+      <p
+        style={{
+          fontSize: '14px',
+          marginTop: 0,
+          marginBottom: 0
+        }}
+      >
+        See{' '}
+        <a href="https://notion.wanner.work/docs/custom-components" target="_blank">
+          https://notion.wanner.work/docs/custom-components
         </a>{' '}
-        for more information on how to create and integrate custom components.
+        for more information on how to create and integrate custom components or how to disable this
+        message.
       </p>
     </div>
   )
