@@ -4,7 +4,7 @@
 
 The all-in-one toolkit to build React applications using Notion as your CMS.
 
-[Visit the documentation at https://notion.wanner.work/ !](https://wanner.work/notion)
+[Visit the documentation!](https://notion.wanner.work/)
 
 ## Features
 
