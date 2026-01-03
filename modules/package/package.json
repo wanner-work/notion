@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "@notionhq/client": "^5.6.0",
-    "@wanner.work/notion": "workspace:",
     "ohash": "^2.0.11"
   },
   "devDependencies": {
