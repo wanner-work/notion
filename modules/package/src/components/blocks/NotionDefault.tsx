@@ -22,7 +22,7 @@ export default function NotionDefault({ block, config }: Readonly<NotionBlockObj
           marginBottom: '6px'
         }}
       >
-        Unsuported type:{' '}
+        Unsupported type:{' '}
         <span
           style={{
             fontStyle: 'italic'
