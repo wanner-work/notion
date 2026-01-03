@@ -13,7 +13,7 @@ export default function NotionRichText({ rich_text }: Readonly<Props>) {
       {text.type === 'text' && (
         <>
           {text.text.link ? (
-            <a href={text.text.link.url} target="_blank" rel="no-refferer">
+            <a href={text.text.link.url} target="_blank" rel="noreferrer">
               <NotionRichTextAnnotations rich_text={text} />
             </a>
           ) : (
