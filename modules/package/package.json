@@ -1,0 +1,35 @@
+{
+  "name": "@wanner.work/notion",
+  "version": "2.0.0",
+  "homepage": "https://github.com/wanner-work/notion",
+  "bugs": "https://github.com/wanner-work/notion/issues",
+  "license": "MIT",
+  "author": "@wanner.work",
+  "repository": "https://github.com/wanner-work/notion",
+  "files": [
+    "dist/*"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rolldown -c",
+    "dev": "rolldown -c -w"
+  },
+  "dependencies": {
+    "@notionhq/client": "^5.6.0",
+    "ohash": "^2.0.11"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "rolldown": "1.0.0-beta.57",
+    "rolldown-plugin-dts": "^0.20.0",
+    "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "react": ">= 18",
+    "react-dom": ">= 18"
+  }
+}

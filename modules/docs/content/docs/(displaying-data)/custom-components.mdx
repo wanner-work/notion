@@ -1,0 +1,87 @@
+---
+title: Customizing the rendering
+description: How to use custom components to render Notion data
+---
+
+If you want to customize the rendering of the blocks or if you want to use a block variant which is currently not supported
+by the `@wanner.work/notion` package, you can pass a custom block component per variant to the `Notion` component.
+
+## Configuration file
+
+For this, it is recommended to create a config file where you define all your custom components and then import
+that config file wherever you use the `Notion` component.
+
+```tsx title="notion.config.tsx"
+import { NotionRenderConfig } from "@wanner.work";
+
+export default {
+  blocks: [],
+  hideUnsupportedBlockWarning: false
+} satisfies NotionRenderConfig
+```
+
+## Custom block components
+
+<Callout type="info" title="Custom File">
+  Although you can define your custom block components directly in the config file, it is recommended
+  to create a separate file for each component for better maintainability.
+</Callout>
+
+After creating the config file, create a custom block component for each block variant you want to customize.
+
+```tsx title="NotionCalloutBlock.tsx"
+import { CalloutBlockObjectResponse } from '@notionhq/client'
+import { NotionBlockObject, NotionRichText } from '@wanner.work/notion'
+
+export default function NotionCalloutBlock({
+  block,
+}: Readonly<NotionBlockObject<CalloutBlockObjectResponse>>) {
+  return (
+    <div className="mb-5 mt-6 rounded-xl bg-neutral-100 px-6 py-4 font-light text-black">
+      <NotionRichText rich_text={block.callout.rich_text} />
+    </div>
+  )
+}
+
+```
+
+Then, import the custom block component in your config file and add it to the `blocks` array.
+
+```tsx title="notion.config.tsx"
+import { NotionRenderConfig } from "@wanner.work";
+import NotionCalloutBlock from "./NotionCalloutBlock";
+
+export default {
+  blocks: [
+    {
+      type: "callout",
+      component: NotionCalloutBlock
+    }
+  ]
+} satisfies NotionRenderConfig
+```
+
+## Using the config file
+
+Finally, import the config file wherever you use the `Notion` or `NotionBlock` component and pass it to the `config` prop.
+
+```tsx
+import Notion from "@wanner.work/notion";
+import notionConfig from "./notion.config";
+
+export default function Application() {
+  // data is the transformed data from the notion API
+
+  return (
+    <Notion
+      data={data}
+      config={notionConfig}
+    />
+  )
+}
+```
+
+<Callout type="info" title="Why not a context?">
+  You might wonder why the config is passed via props instead of using a React context. The reason is that using context would
+  break server-side rendering and static site generation, as the context would not be available during the initial render on the server.
+</Callout>

@@ -1,0 +1,37 @@
+---
+title: Querying a page
+description: How to query a Notion page using NotionQuery
+---
+
+## Using retrievePage
+
+As already shown in the [Using NotionQuery](./index) section, you can easily query a Notion page using the `NotionQuery` class. Here is a quick example:
+
+```tsx
+import { NotionQuery } from '@wanner.work/notion'
+
+const query = new NotionQuery(process.env.NOTION_SECRET)
+
+const {
+  page,
+  data
+} = await query.retrievePage('the-id-of-the-page')
+```
+
+This will return the transformed page data, which you can then use with the `Notion` component to render the content in your React application, as well as
+the page information including properties.
+
+## Using retrievePageInformation and retrievePageData
+
+If you only need the page information or only the page data, you can also use the `retrievePageInformation` or `retrievePageData` methods respectively:
+
+```tsx
+import { NotionQuery } from '@wanner.work/notion'
+
+const query = new NotionQuery(process.env.NOTION_SECRET)
+
+const page = await query.retrievePageInformation('the-id-of-the-page')
+const data = await query.retrievePageData('the-id-of-the-page')
+```
+
+The `retrievePage` method is just a convenient wrapper around these two methods to fetch both in one call and do it in parallel.

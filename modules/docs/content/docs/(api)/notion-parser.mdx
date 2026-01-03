@@ -1,0 +1,20 @@
+---
+title: NotionParser
+---
+
+## Usage
+
+```ts
+import { NotionParser, NotionQuery } from '@wanner.work/notion';
+
+const query = new NotionQuery(process.env['NOTION_API_KEY']!);
+
+const page = await query.retrievePageInformation('your-page-id');
+const title = NotionParser.getPageTitle(page)
+```
+
+<Card icon={<MousePointerClick />} title="More examples" description="View this page to see more examples" href="/docs/notion#rendering-page-and-database-information"/>
+
+## Type Reference
+
+<AutoTypeTable path="./src/interfaces/temp/NotionParser.ts" name="NotionParser" />

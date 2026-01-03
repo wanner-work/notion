@@ -1,0 +1,71 @@
+---
+title: Using the @notionhq/client
+description: How to fetch Notion page content using @notionhq/client
+---
+
+If you need more control over the data fetching process, you can use the `@notionhq/client` package to fetch the data
+and then use the `NotionQuery` class to transform it.
+
+<Callout type="info" title="Alternative Guide">
+  The `NotionQuery` class is the preferred way to fetch Notion page content using this package. It provides a simple and
+  convenient interface to interact with Notion's API and retrieve the content of a Notion page. Only use @notionhq/client
+  directly if you need more control over the data fetching process.
+</Callout>
+
+<Callout type="warning" title="Server Side Requests">
+  Make sure to request the Notion's API only from the server because it requires the request to be made from a secure environment.
+</Callout>
+
+## Usage
+
+### Initializing NotionQuery
+
+First, import the `@notionhq/client` and the `NotionQuery` class from the package. Then create an instance of the Notion client by providing your Notion integration token which you get if you [create a notion integration](./getting-started/preparing-notion).
+
+```tsx
+import { Client } from '@notionhq/client'
+import { NotionQuery } from '@wanner.work/notion'
+
+// creating a new api client with the integration token
+const client = new Client({
+  auth: process.env.NOTION_SECRET
+})
+```
+
+### Querying a Notion page
+
+After that, you can use the Notion client to fetch pages and databases. In this example, we will query a database to get the first page and then fetch all blocks from that page.
+
+```tsx
+import { Client, QueryDatabaseResponse, PageObjectResponse } from '@notionhq/client'
+import { NotionQuery } from '@wanner.work/notion'
+
+const client = new Client({
+  auth: process.env.NOTION_SECRET
+})
+
+// get all pages from a database or do whatever you'd like to do with the api client.
+const request = (await client.databases.query({
+  database_id: process.env.NOTION_DATABASE_TOKEN as string
+})) as QueryDatabaseResponse
+const results = request.results as PageObjectResponse[]
+
+// get the first page
+const page = results[0]
+
+// get all blocks from the page
+const response = await client.blocks.children.list({
+  block_id: page.id
+})
+
+// transform the data using the NotionQuery class
+const query = new NotionQuery(client)
+const data = await query.transform(response)
+```
+
+This will return the transformed Notion page content that you can then use with the `Notion` component to render the content in your React application.
+
+<Callout type="info" title="Transforming Data">
+  The transformation process is required for the renderer to work as expected. The `NotionQuery` class takes care of transforming
+  the raw data from the Notion API into a format that can be easily rendered using the provided components.
+</Callout>

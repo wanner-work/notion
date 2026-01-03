@@ -1,0 +1,62 @@
+---
+title: Querying a database
+description: How to query a Notion database using NotionQuery
+---
+
+## Using retrieveDatabase
+
+With the `NotionQuery` class, you can also easily query a Notion database to retrieve its information and entries. This is done using the `retrieveDatabase` method.
+
+```tsx
+import { NotionQuery } from '@wanner.work/notion'
+
+const query = new NotionQuery(process.env.NOTION_SECRET)
+
+const {
+  database,
+  entries
+} = await query.retrieveDatabaseEntries('the-id-of-the-database')
+```
+
+This will return an array of all database entries as well as the informations of a database.
+An entry can either be a page information object or a DataSourceObjectResponse depending on the content of the database.
+
+## Using retrieveDatabaseInformation and retrieveDatabaseEntries
+
+If you only need the database information or only the database entries, you can also use the `retrieveDatabaseInformation` or `retrieveDatabaseEntries` methods respectively:
+
+```tsx
+import { NotionQuery } from '@wanner.work/notion'
+const query = new NotionQuery(process.env.NOTION_SECRET)
+
+const database = await query.retrieveDatabaseInformation('the-id-of-the-database')
+const entries = await query.retrieveDatabaseEntries('the-id-of-the-database')
+```
+
+The `retrieveDatabaseEntries` method is just a convenient wrapper around these two methods to fetch both in one call and do it in parallel.
+
+## Using filters and sorts
+
+You can also apply filters and sorts to your database query by passing optional parameters to the `retrieveDatabaseEntries` method.
+
+```tsx
+import { NotionQuery } from '@wanner.work/notion'
+
+const query = new NotionQuery(process.env.NOTION_SECRET)
+
+const entries = await query.retrieveDatabaseEntries('the-id-of-the-database', {
+  filter: {
+    "and": [
+      {
+        "property": "Slug",
+        "rich_text": {
+          "equals": slug
+        }
+      }
+    ]
+  }
+})
+```
+
+This example applies a filter to retrieve only the entries where the "Slug" property matches a specific value. Refer to
+the Notion API documentation for more details on how to construct filters and sorts: [Notion API - Query a data source](https://developers.notion.com/reference/query-a-data-source).

@@ -1,0 +1,24 @@
+---
+title: Configure Notion
+description: What you need to do in Notion to use it as a CMS
+---
+
+To be able to access pages inside a Notion workspace using their API, you need to do a few things to prepare Notion for that.
+
+## 1. Create an integration
+
+First you need to create an integration with read access. You can do that by visiting this page.
+
+<Card icon={<ExternalLink />} title="Notion Integration" description="Create a integration with read permission." href="https://www.notion.so/profile/integrations"/>
+
+## 2. Enable the integration in your workspace
+
+After creating the integration, you need to enable it in your workspace. You can do that by following these steps:
+
+1. Open Notion and navigate to the top level page you want to use.
+2. Click the `triple dot` menu in the top right corner.
+3. Select `Connections` from the dropdown menu.
+4. In the `Connections` modal, search for your integration and enable it.
+
+Now your integration has access to the page and all its subpages. You can now use the page id to fetch the content from
+the Notion API.
