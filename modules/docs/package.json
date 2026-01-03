@@ -10,6 +10,7 @@
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
+    "@notionhq/client": "^5.6.0",
     "@wanner.work/notion": "../",
     "fumadocs-core": "16.4.1",
     "fumadocs-mdx": "14.2.3",
