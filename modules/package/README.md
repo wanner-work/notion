@@ -1,4 +1,4 @@
-![@wanner.work/notion](assets/lead.svg)
+![@wanner.work/notion](./assets/lead.svg)
 
 # @wanner.work/notion.
 
