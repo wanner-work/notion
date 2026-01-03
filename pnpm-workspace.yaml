@@ -1,5 +1,5 @@
 packages:
-  - .
+  - modules/**
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver

@@ -1,5 +1,5 @@
 {
-  "name": "playground",
+  "name": "@wanner.work/notion-playground",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@wanner.work/notion": "../",
+    "@wanner.work/notion": "workspace:",
     "next": "16.1.1",
     "react": "19.2.3",
     "react-dom": "19.2.3"
