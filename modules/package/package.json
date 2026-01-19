@@ -1,7 +1,7 @@
 {
   "name": "@wanner.work/notion",
   "description": "The >7KB, all-in-one toolkit to build React applications using Notion as your CMS.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "homepage": "https://notion.wanner.work",
   "bugs": "https://github.com/wanner-work/notion/issues",
   "license": "MIT",
